@@ -1,22 +1,33 @@
 package com.keepgulp.springbootfileonline.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.keepgulp.springbootfileonline.configure.ConfigProperties;
+import com.keepgulp.springbootfileonline.fileupload.file.FileTreeNode;
+import com.keepgulp.springbootfileonline.fileupload.file.UploadFile;
 import com.keepgulp.springbootfileonline.fileupload.form.UploadForm;
+import com.keepgulp.springbootfileonline.service.FileService;
+import com.keepgulp.springbootfileonline.utils.FileType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.constraints.NotNull;
+import javax.xml.ws.Response;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @description:
@@ -26,12 +37,65 @@ import java.nio.file.Paths;
 @Controller
 public class UploadController {
 
+    @Autowired
+    private FileService fileService;
+
     @GetMapping("/")
     public String index() {
         return "upload";
     }
 
-    @PostMapping("/upload") // //new annotation since 4.3
+    @GetMapping("/fm")
+    public String fileManager(Model model) {
+        List<UploadFile> files = fileService.scanAllFiles();
+        model.addAttribute("files", files);
+        model.addAttribute("title", "文件管理器");
+        return "filemanager";
+    }
+
+    @GetMapping(value = "/filelist/{type}")
+    public String fileList(@PathVariable @NotNull String type, Model model) {
+        List<UploadFile> files = new ArrayList<>();
+        if("all".equals(type)) {
+            files = fileService.scanAllFiles();
+        }
+        model.addAttribute("files", files);
+        return "fragments/fileList";
+    }
+
+    @GetMapping(value = "/filetree")
+    @ResponseBody
+    public String fileTree(Model model) {
+        FileTreeNode rootNode = new FileTreeNode();
+        rootNode.setText("/");
+        rootNode.setType(FileType.FOLDER.getType());
+        List<FileTreeNode> list = fileService.scanAllFilesTree();
+        rootNode.setChildren(list);
+        List<FileTreeNode> rList = new ArrayList<>();
+        rList.add(rootNode);
+        model.addAttribute("data", rList);
+        return JSON.toJSONString(rList);
+    }
+
+    @RequestMapping("/uploadfiles")
+    public String uploadFiles(@RequestParam("file") MultipartFile file,
+                              Model model) {
+        if (file.isEmpty()) {
+            return "redirect:uploadStatus";
+        }
+        try {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(ConfigProperties.getUploadPath(), file.getOriginalFilename());
+            Files.write(path, bytes);
+            List<UploadFile> files = fileService.scanAllFiles();
+            model.addAttribute("files", files);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/fm";
+    }
+
+    @PostMapping("/upload")
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
         if (file.isEmpty()) {

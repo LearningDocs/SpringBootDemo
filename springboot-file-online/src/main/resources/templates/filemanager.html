@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" th:href="@{/image/logo.png}"/>
+    <title th:text="${title}"> - 文件管理器</title>
+
+    <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}" rel="stylesheet"></link>
+    <link th:href="@{/webjars/bootstrap/4.1.1/dist/css/bootstrap.css}" rel="stylesheet"></link>
+    <link th:href="@{/webjars/bootstrap-table/1.11.1/dist/bootstrap-table.css}" rel="stylesheet"></link>
+    <link th:href="@{/webjars/dropzone/5.1.1/dist/basic.css}" rel="stylesheet"></link>
+    <link th:href="@{/webjars/dropzone/5.1.1/dist/dropzone.css}" rel="stylesheet"></link>
+    <link th:href="@{/webjars/animate.css/3.5.2/animate.css}" rel="stylesheet">
+    <link th:href="@{/webjars/jstree/3.3.5/dist/themes/default/style.css}" rel="stylesheet">
+    <!--<link th:href="@{/webjars/jstree/3.3.5/dist/themes/default-dark/style.css}" rel="stylesheet">-->
+    <link th:href="@{css/style.css}" rel="stylesheet">
+
+    <!-- 全局js -->
+    <!-- JQuery import -->
+    <script th:src="@{/webjars/jquery/3.3.1/dist/jquery.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.1/dist/js/bootstrap.js}"></script>
+    <script th:src="@{/webjars/bootstrap-table/1.11.1/dist/bootstrap-table.js}"></script>
+    <script th:src="@{/webjars/dropzone/5.1.1/dist/dropzone.js}"></script>
+    <script th:src="@{/webjars/jstree/3.3.5/dist/jstree.js}"></script>
+    <!-- 自定义js -->
+    <script th:src="@{js/content.js}"></script>
+
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="file-manager">
+                            <h5>显示：</h5>
+                            <a href="#" class="file-control active">所有</a>
+                            <a href="#" class="file-control">文档</a>
+                            <a href="#" class="file-control">视频</a>
+                            <a href="#" class="file-control">图片</a>
+                            <div class="hr-line-dashed"></div>
+                            <!--上传文件-->
+                            <div th:replace="fragments/uploadContent"></div>
+                            <div class="hr-line-dashed"></div>
+                            <!--文件树-->
+                                    <div th:replace="fragments/fileTree"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight">
+                <div class="row">
+                    <div class="col-sm-12" >
+                        <div id="list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .jstree-open > .jstree-anchor > .fa-folder:before {
+            content: "\f07c";
+        }
+
+        .jstree-default .jstree-icon.none {
+            width: 0;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('.file-box').each(function () {
+                animationHover(this, 'pulse');
+            });
+
+            $('#clear-dropzon').click(function () {
+                console.log('aaa');
+            })
+            
+            $('#refresh-list').click(function () {
+                $('#list').load('/filelist/all');
+            })
+            
+            Dropzone.options.myAwesomeDropzone = {
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 100,
+                maxFiles: 100,
+                // Dropzone settings
+                init: function () {
+                    this.on("sendingmultiple", function (files, response) {
+                        console.log(files)
+                    });
+                    this.on("successmultiple", function (files, response) {
+                        console.log(files, response)
+                    });
+                    this.on("errormultiple", function (files, response) {
+                        console.log('error')
+                    });
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

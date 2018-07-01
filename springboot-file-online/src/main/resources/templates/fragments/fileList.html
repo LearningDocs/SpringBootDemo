@@ -1,0 +1,47 @@
+<div class="file-box" th:each="file : ${files}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div class="file" th:switch="${file.type}">
+        <a href="#">
+            <span class="corner"></span>
+            <!--默认文件 0-->
+            <div th:case="0" class="icon">
+                <i class="fa fa-file"></i>
+            </div>
+            <!--文本文件 1-->
+            <div th:case="1" class="icon">
+                <i class="fa fa-file-text"></i>
+            </div>
+            <!--图片 2-->
+            <div th:case="2" class="icon">
+                <!--<img alt="image" class="img-responsive" th:src="@{image/p2.jpg}"/>-->
+                <i class="fa fa-picture-o"></i>
+            </div>
+            <!--音频文件按 3-->
+            <div th:case="3" class="icon">
+                <i class="fa fa-music"></i>
+            </div>
+            <!--excel文件 4-->
+            <div th:case="4" class="icon">
+                <i class="fa fa-file-excel-o"></i>
+            </div>
+            <!--视频文件 5-->
+            <div th:case="5" class="icon">
+                <i class="fa fa-video-camera"></i>
+            </div>
+            <!--压缩文件 6-->
+            <div th:case="6" class="icon">
+                <i class="fa fa-file-archive-o"></i>
+            </div>
+            <!--word文件 7-->
+            <div th:case="7" class="icon">
+                <i class="fa fa-file-word-o"></i>
+            </div>
+
+
+            <div class="file-name">
+                <span th:text="${file.name}"></span>
+                <br/>
+                <small th:text="'修改时间：' + ${file.time}"></small>
+            </div>
+        </a>
+    </div>
+</div>

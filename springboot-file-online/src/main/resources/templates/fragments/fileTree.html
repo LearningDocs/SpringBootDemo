@@ -1,0 +1,165 @@
+<h5>文件树</h5>
+<div class="ibox-content">
+    <div id="using_json"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get( "/filetree", function( data ) {
+            data = JSON.parse(data);
+
+            $('#using_json').jstree({
+                'core': {
+                    'data': data
+                },
+                'plugins': ['types', 'dnd'],
+                'types': {
+                    'folder': {
+                        'icon': 'fa fa-folder'
+                    },
+                    'code': {
+                        'icon': 'fa fa-file-code-o'
+                    },
+                    'code': {
+                        'icon': 'fa fa-file-code-o'
+                    },
+                    'img': {
+                        'icon': 'fa fa-file-image-o'
+                    },
+                    'text': {
+                        'icon': 'fa fa-file-text-o'
+                    },
+                    'music': {
+                        'icon': 'fa fa-music'
+                    },
+                    'file': {
+                        'icon': 'fa fa-file'
+                    },
+                    'archive': {
+                        'icon': 'fa fa-file-archive-o'
+                    },
+                    'video': {
+                        'icon': 'fa fa-video-camera'
+                    }
+                }
+            });
+        });
+
+        $('#jstree1').jstree({
+            'core': {
+                'check_callback': true
+            },
+            'plugins': ['types', 'dnd'],
+            'types': {
+                'default': {
+                    'icon': 'fa fa-folder'
+                },
+                'html': {
+                    'icon': 'fa fa-file-code-o'
+                },
+                'svg': {
+                    'icon': 'fa fa-file-picture-o'
+                },
+                'css': {
+                    'icon': 'fa fa-file-code-o'
+                },
+                'img': {
+                    'icon': 'fa fa-file-image-o'
+                },
+                'js': {
+                    'icon': 'fa fa-file-text-o'
+                }
+
+            }
+        });
+
+        var data = [
+            {
+                'text': 'Resources',
+                'state': {
+                    'opened': true
+                },
+                'children': [
+                    {
+                        'text': 'css',
+                        'children': [
+                            {
+                                'text': 'animate.css',
+                                'icon': 'none'
+                            },
+                            {
+                                'text': 'bootstrap.css',
+                                'icon': 'none'
+                            },
+                            {
+                                'text': 'main.css',
+                                'type': 'css'
+                            },
+                            {
+                                'text': 'style.css',
+                                'type': 'css'
+                            }
+                        ],
+                        'state': {
+                            'opened': true
+                        }
+                    },
+                    {
+                        'text': 'js',
+                        'children': [
+                            {
+                                'text': 'bootstrap.js',
+                                'type': 'js'
+                            },
+                            {
+                                'text': 'hplus.min.js',
+                                'type': 'js'
+                            },
+                            {
+                                'text': 'jquery.min.js',
+                                'type': 'js'
+                            },
+                            {
+                                'text': 'jsTree.min.js',
+                                'type': 'js'
+                            },
+                            {
+                                'text': 'custom.min.js',
+                                'type': 'js'
+                            }
+                        ],
+                        'state': {
+                            'opened': true
+                        }
+                    },
+                    {
+                        'text': 'html',
+                        'children': [
+                            {
+                                'text': 'layout.html',
+                                'type': 'html'
+                            },
+                            {
+                                'text': 'navigation.html',
+                                'type': 'html'
+                            },
+                            {
+                                'text': 'navbar.html',
+                                'type': 'html'
+                            },
+                            {
+                                'text': 'footer.html',
+                                'type': 'html'
+                            },
+                            {
+                                'text': 'sidebar.html',
+                                'type': 'html'
+                            }
+                        ],
+                        'state': {
+                            'opened': true
+                        }
+                    }
+                ]
+            }];
+    });
+</script>

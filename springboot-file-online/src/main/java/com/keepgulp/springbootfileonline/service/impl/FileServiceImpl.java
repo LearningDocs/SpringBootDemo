@@ -9,7 +9,6 @@ import com.keepgulp.springbootfileonline.utils.FileType;
 import com.keepgulp.springbootfileonline.utils.FileUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.comparator.ComparableComparator;
 import org.thymeleaf.util.StringUtils;
 
 import java.io.File;
@@ -36,7 +35,8 @@ public class FileServiceImpl implements FileService {
                 }
             }
             String time = DateUtil.formatSimpleDate(file.lastModified());
-            UploadFile uf = new UploadFile(name, type, time, file.getAbsolutePath());
+            String path = file.getAbsolutePath().substring(ConfigProperties.getUploadPath().length()).replaceAll("\\\\","/");
+            UploadFile uf = new UploadFile(name, type, time, "/root" + path);
             uploadFiles.add(uf);
         }
         return uploadFiles;
@@ -55,6 +55,8 @@ public class FileServiceImpl implements FileService {
             FileTreeNode node = new FileTreeNode();
             String name = file.getName();
             node.setText(name);
+            String path = file.getAbsolutePath().substring(ConfigProperties.getUploadPath().length());
+            node.setPath(path);
             if(file.isDirectory()) {
                 // 文件夹
                 List<FileTreeNode> childrenList = scanFileAndFolder(file.getAbsolutePath());

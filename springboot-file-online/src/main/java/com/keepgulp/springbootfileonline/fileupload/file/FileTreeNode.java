@@ -8,7 +8,17 @@ public class FileTreeNode {
 
     private String type;
 
+    private String path;
+
     private List<FileTreeNode> children;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public String getText() {
         return text;

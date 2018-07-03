@@ -94,6 +94,15 @@ public class FileUtil {
             }
             return scanFiles;
         }
+    }
 
+    /**
+     * 获取文件后缀
+     * @param fileName
+     * @return
+     */
+    public static String getSuffixFromFileName(String fileName) {
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        return suffix;
     }
 }

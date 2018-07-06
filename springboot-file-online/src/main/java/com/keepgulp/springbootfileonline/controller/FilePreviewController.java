@@ -1,5 +1,6 @@
 package com.keepgulp.springbootfileonline.controller;
 
+import com.keepgulp.springbootfileonline.utils.FileType;
 import com.keepgulp.springbootfileonline.utils.FileUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,14 @@ public class FilePreviewController {
     @GetMapping("/picture")
     public String pictureFilePreviewHandler(@RequestParam("path") String path, Model model) {
         String fileSuffix = FileUtil.getSuffixFromFileName(path);
+        Integer type = FileUtil.fileTypeMap.get(fileSuffix);
+        if(null != type) {
+            if(FileType.IMG.getIndex() == type) {
 
+            }
+        } else {
+            return "preview/error";
+        }
 
         return "preview/picture";
     }

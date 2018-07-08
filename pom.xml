@@ -11,6 +11,8 @@
 
     <modules>
         <module>springboot-socketio</module>
+        <module>springboot-email</module>
+        <module>springboot-file-online</module>
     </modules>
 
 </project>

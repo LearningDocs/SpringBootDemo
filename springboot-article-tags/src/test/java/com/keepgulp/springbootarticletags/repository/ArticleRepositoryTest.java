@@ -41,11 +41,13 @@ public class ArticleRepositoryTest {
         article1.setTags(tags);
         articleRepository.save(article1);
 
+        List<Tag> list = tagRepository.findAll();
+
         List<Tag> tags2 = new ArrayList<>();
 
 
-        for(int i=0; i< 5; i++) {
-            tags2.add(tags.get(i));
+        for(int i=0; i< list.size() / 2 ; i++) {
+            tags2.add(list.get(i));
         }
 
         Article article2 = new Article();

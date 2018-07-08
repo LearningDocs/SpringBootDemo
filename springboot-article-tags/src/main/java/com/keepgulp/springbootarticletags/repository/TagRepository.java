@@ -10,4 +10,8 @@ import java.util.List;
 public interface TagRepository extends JpaRepository<Tag, Long> {
 
     List<Tag> findByNameIn(List<String> tags);
+
+    boolean existsByName(String name);
+
+    Tag findDistinctByName(String name);
 }

@@ -22,8 +22,8 @@ public class Article implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "article_tag_map",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "article_tag",
             joinColumns = {
                     @JoinColumn(name = "article_id")
             },inverseJoinColumns = {@JoinColumn(name = "tag_id")})

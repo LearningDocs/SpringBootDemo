@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/preview")
 public class FilePreviewController {
 
-    @GetMapping("/picture")
+    @RequestMapping("/picture")
     public String pictureFilePreviewHandler(@RequestParam("path") String path, Model model) {
         String fileSuffix = FileUtil.getSuffixFromFileName(path);
         Integer type = FileUtil.fileTypeMap.get(fileSuffix);
         if(null != type) {
             if(FileType.IMG.getIndex() == type) {
-
+                model.addAttribute("path", "/root" + path);
             }
         } else {
             return "preview/error";
@@ -29,6 +29,15 @@ public class FilePreviewController {
 
     @GetMapping("/simtext")
     public String simTextFilePreviewHandler(@RequestParam("path") String path, Model model) {
+        String fileSuffix = FileUtil.getSuffixFromFileName(path);
+        Integer type = FileUtil.fileTypeMap.get(fileSuffix);
+        if(null != type) {
+            if(FileType.TEXT.getIndex() == type) {
+                model.addAttribute("path", "/root" + path);
+            }
+        } else {
+            return "preview/error";
+        }
         return "preview/simtext";
     }
 

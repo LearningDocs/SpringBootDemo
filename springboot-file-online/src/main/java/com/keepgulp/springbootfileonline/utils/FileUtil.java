@@ -102,7 +102,7 @@ public class FileUtil {
      * @return
      */
     public static String getSuffixFromFileName(String fileName) {
-        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
         return suffix;
     }
 }

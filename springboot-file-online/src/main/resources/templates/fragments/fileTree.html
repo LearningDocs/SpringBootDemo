@@ -4,6 +4,10 @@
 </div>
 <script>
     $(document).ready(function () {
+        loadTree();
+    });
+
+    function loadTree() {
         $.get( "/filetree", function( data ) {
             data = JSON.parse(data);
 
@@ -42,124 +46,25 @@
                     }
                 }
             });
-        });
 
-        $('#jstree1').jstree({
-            'core': {
-                'check_callback': true
-            },
-            'plugins': ['types', 'dnd'],
-            'types': {
-                'default': {
-                    'icon': 'fa fa-folder'
-                },
-                'html': {
-                    'icon': 'fa fa-file-code-o'
-                },
-                'svg': {
-                    'icon': 'fa fa-file-picture-o'
-                },
-                'css': {
-                    'icon': 'fa fa-file-code-o'
-                },
-                'img': {
-                    'icon': 'fa fa-file-image-o'
-                },
-                'js': {
-                    'icon': 'fa fa-file-text-o'
+            $('#using_json').bind("changed.jstree", function (e, data) {
+                var nodeData = data.node.original;
+                console.log(nodeData)
+                if(nodeData.type == 'folder') {
+                    $('#list').load('/filelist/all');
+                } else if(nodeData.type == 'img') {
+                    $('#list').load('/preview/picture', {path: nodeData.path}, function() {
+
+                    });
+                } else if(nodeData.type == 'text') {
+                    $('#list').load('/preview/simtext', {path: nodeData.path}, function() {
+
+                    });
+                } else {
+
                 }
-
-            }
+            });
         });
+    }
 
-        var data = [
-            {
-                'text': 'Resources',
-                'state': {
-                    'opened': true
-                },
-                'children': [
-                    {
-                        'text': 'css',
-                        'children': [
-                            {
-                                'text': 'animate.css',
-                                'icon': 'none'
-                            },
-                            {
-                                'text': 'bootstrap.css',
-                                'icon': 'none'
-                            },
-                            {
-                                'text': 'main.css',
-                                'type': 'css'
-                            },
-                            {
-                                'text': 'style.css',
-                                'type': 'css'
-                            }
-                        ],
-                        'state': {
-                            'opened': true
-                        }
-                    },
-                    {
-                        'text': 'js',
-                        'children': [
-                            {
-                                'text': 'bootstrap.js',
-                                'type': 'js'
-                            },
-                            {
-                                'text': 'hplus.min.js',
-                                'type': 'js'
-                            },
-                            {
-                                'text': 'jquery.min.js',
-                                'type': 'js'
-                            },
-                            {
-                                'text': 'jsTree.min.js',
-                                'type': 'js'
-                            },
-                            {
-                                'text': 'custom.min.js',
-                                'type': 'js'
-                            }
-                        ],
-                        'state': {
-                            'opened': true
-                        }
-                    },
-                    {
-                        'text': 'html',
-                        'children': [
-                            {
-                                'text': 'layout.html',
-                                'type': 'html'
-                            },
-                            {
-                                'text': 'navigation.html',
-                                'type': 'html'
-                            },
-                            {
-                                'text': 'navbar.html',
-                                'type': 'html'
-                            },
-                            {
-                                'text': 'footer.html',
-                                'type': 'html'
-                            },
-                            {
-                                'text': 'sidebar.html',
-                                'type': 'html'
-                            }
-                        ],
-                        'state': {
-                            'opened': true
-                        }
-                    }
-                ]
-            }];
-    });
 </script>

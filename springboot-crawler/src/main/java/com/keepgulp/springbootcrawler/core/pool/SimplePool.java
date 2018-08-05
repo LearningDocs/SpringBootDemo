@@ -19,7 +19,6 @@ public class SimplePool<T extends IPoolCell> {
         return instance;
     }
 
-
     private int size;
 
     private BlockingQueue<T> queue;
@@ -27,7 +26,6 @@ public class SimplePool<T extends IPoolCell> {
     private String name;
 
     private ObjectFactory objectFactory;
-
 
     private AtomicInteger objCreateCount = new AtomicInteger(0);
 

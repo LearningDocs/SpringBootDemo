@@ -1,7 +1,7 @@
-package com.keepgulp.springbootcrawler.core.utils;
+package com.keepgulp.springbootcrawler.common.utils;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlHttpConf;
-import com.keepgulp.springbootcrawler.core.entity.CrawlMeta;
+import com.keepgulp.springbootcrawler.common.entity.CrawlHttpConf;
+import com.keepgulp.springbootcrawler.common.entity.CrawlMeta;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;

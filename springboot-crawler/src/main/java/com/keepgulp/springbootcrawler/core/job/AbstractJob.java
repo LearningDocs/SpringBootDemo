@@ -1,6 +1,6 @@
 package com.keepgulp.springbootcrawler.core.job;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlResult;
+import com.keepgulp.springbootcrawler.common.entity.CrawlResult;
 import com.keepgulp.springbootcrawler.core.pool.SimplePool;
 import lombok.extern.slf4j.Slf4j;
 

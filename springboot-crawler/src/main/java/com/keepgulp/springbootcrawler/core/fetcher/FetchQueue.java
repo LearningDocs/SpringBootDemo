@@ -1,6 +1,6 @@
 package com.keepgulp.springbootcrawler.core.fetcher;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlMeta;
+import com.keepgulp.springbootcrawler.common.entity.CrawlMeta;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;

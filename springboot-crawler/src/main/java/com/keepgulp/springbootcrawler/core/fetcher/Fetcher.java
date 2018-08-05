@@ -1,7 +1,7 @@
 package com.keepgulp.springbootcrawler.core.fetcher;
 
-import com.keepgulp.springbootcrawler.core.config.ConfigProperites;
-import com.keepgulp.springbootcrawler.core.entity.CrawlMeta;
+import com.keepgulp.springbootcrawler.common.config.ConfigProperites;
+import com.keepgulp.springbootcrawler.common.entity.CrawlMeta;
 import com.keepgulp.springbootcrawler.core.job.DefaultAbstractCrawlJob;
 import com.keepgulp.springbootcrawler.core.pool.ObjectFactory;
 import com.keepgulp.springbootcrawler.core.pool.SimplePool;
@@ -20,9 +20,7 @@ public class Fetcher {
 
     private FetchQueue fetchQueue;
 
-
     private Executor executor;
-
 
     @Setter
     private ThreadConf threadConf;

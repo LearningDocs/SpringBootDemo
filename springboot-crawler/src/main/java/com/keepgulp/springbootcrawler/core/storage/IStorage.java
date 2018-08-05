@@ -1,6 +1,6 @@
 package com.keepgulp.springbootcrawler.core.storage;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlResult;
+import com.keepgulp.springbootcrawler.common.entity.CrawlResult;
 
 public interface IStorage {
     /**

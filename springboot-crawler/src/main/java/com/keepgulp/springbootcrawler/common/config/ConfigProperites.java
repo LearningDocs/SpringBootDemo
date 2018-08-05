@@ -1,4 +1,4 @@
-package com.keepgulp.springbootcrawler.core.config;
+package com.keepgulp.springbootcrawler.common.config;
 
 import lombok.Getter;
 import lombok.ToString;

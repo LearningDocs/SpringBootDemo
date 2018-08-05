@@ -1,7 +1,7 @@
 package com.keepgulp.springbootcrawler.core.filter;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlMeta;
-import com.keepgulp.springbootcrawler.core.entity.CrawlResult;
+import com.keepgulp.springbootcrawler.common.entity.CrawlMeta;
+import com.keepgulp.springbootcrawler.common.entity.CrawlResult;
 import com.keepgulp.springbootcrawler.core.fetcher.FetchQueue;
 import com.keepgulp.springbootcrawler.core.fetcher.JobCount;
 import lombok.extern.slf4j.Slf4j;
@@ -90,8 +90,6 @@ public class ResultFilter {
                 return false;
             }
         }
-
-
         return crawlMeta.getPositiveRegex().size() == 0;
     }
 }

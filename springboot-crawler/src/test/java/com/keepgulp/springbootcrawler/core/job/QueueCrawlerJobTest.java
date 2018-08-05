@@ -1,7 +1,7 @@
 package com.keepgulp.springbootcrawler.core.job;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlMeta;
-import com.keepgulp.springbootcrawler.core.entity.CrawlResult;
+import com.keepgulp.springbootcrawler.common.entity.CrawlMeta;
+import com.keepgulp.springbootcrawler.common.entity.CrawlResult;
 import com.keepgulp.springbootcrawler.core.fetcher.Fetcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,10 +28,12 @@ public class QueueCrawlerJobTest {
     public void testCrawel() throws Exception {
         Fetcher fetcher = new Fetcher(2, QueueCrawlerJob.class);
 
-        String url = "http://chengyu.911cha.com/zishu_4.html";
+//        String url = "https://chengyu.911cha.com/zishu_4.html";
+        String url = "http://www.ip3366.net";
         CrawlMeta crawlMeta = new CrawlMeta();
         crawlMeta.setUrl(url);
-        crawlMeta.addPositiveRegex("http://chengyu.911cha.com/zishu_4_p[0-9]+\\.html$");
+        crawlMeta.addPositiveRegex("http://www.ip3366.net/\\?stype=1&page=[2-5]$");
+//        crawlMeta.addPositiveRegex("https://chengyu.911cha.com/[a-z|A-Z]+==.html$");
 
         fetcher.addFeed(crawlMeta);
 

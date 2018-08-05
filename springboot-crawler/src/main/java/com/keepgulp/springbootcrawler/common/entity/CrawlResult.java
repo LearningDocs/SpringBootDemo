@@ -1,4 +1,4 @@
-package com.keepgulp.springbootcrawler.core.entity;
+package com.keepgulp.springbootcrawler.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

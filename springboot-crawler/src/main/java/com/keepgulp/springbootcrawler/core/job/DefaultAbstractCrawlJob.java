@@ -1,11 +1,11 @@
 package com.keepgulp.springbootcrawler.core.job;
 
-import com.keepgulp.springbootcrawler.core.entity.CrawlHttpConf;
-import com.keepgulp.springbootcrawler.core.entity.CrawlMeta;
-import com.keepgulp.springbootcrawler.core.entity.CrawlResult;
+import com.keepgulp.springbootcrawler.common.entity.CrawlHttpConf;
+import com.keepgulp.springbootcrawler.common.entity.CrawlMeta;
+import com.keepgulp.springbootcrawler.common.entity.CrawlResult;
 import com.keepgulp.springbootcrawler.core.fetcher.FetchQueue;
 import com.keepgulp.springbootcrawler.core.filter.ResultFilter;
-import com.keepgulp.springbootcrawler.core.utils.HttpUtils;
+import com.keepgulp.springbootcrawler.common.utils.HttpUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -79,7 +79,7 @@ public abstract class DefaultAbstractCrawlJob extends AbstractJob{
         }
 
 
-        if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) { // 请求成功
+        if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) { // 请求不成功
             this.crawlResult = new CrawlResult();
             this.crawlResult.setStatus(response.getStatusLine().getStatusCode(), response.getStatusLine().getReasonPhrase());
             this.crawlResult.setUrl(crawlMeta.getUrl());

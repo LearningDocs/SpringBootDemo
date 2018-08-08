@@ -13,8 +13,4 @@ public class SpringbootDroolsApplication {
         SpringApplication.run(SpringbootDroolsApplication.class, args);
     }
 
-    @Bean
-    public KieContainer kieContainer() {
-        return KieServices.Factory.get().getKieClasspathContainer();
-    }
 }

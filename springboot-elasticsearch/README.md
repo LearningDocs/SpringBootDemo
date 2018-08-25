@@ -11,3 +11,8 @@ ElasticSearch TransportClient https://www.elastic.co/guide/en/elasticsearch/clie
 Jest官方文档 https://github.com/searchbox-io/Jest/tree/master/jest
 
 个人整理的ElasticSearch学习思维导图 http://naotu.baidu.com/file/3b7f1dec1a487abf6ffe51f1a950744b?token=e08546f6ca1fa320
+
+
+##资源
+- https://zhuanlan.zhihu.com/p/25783716
+- https://www.videograbber.net/zh/download-free-movies.html
